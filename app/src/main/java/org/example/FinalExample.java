@@ -50,6 +50,16 @@ public class FinalExample {
         private List<String> items;
         private double total;
 
+        public Order() {
+            this(null, null, 0);
+        }
+
+        public Order(String customerName, List<String> items, double total) {
+            this.customerName = customerName;
+            this.items = items;
+            this.total = total;
+        }
+
         public void printOrderSummary() {
             ReportGenerator generator = new ReportGenerator();
             generator.printHeader(customerName);
