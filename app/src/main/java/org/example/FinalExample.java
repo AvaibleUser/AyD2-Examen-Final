@@ -85,15 +85,15 @@ public class FinalExample {
     }
 
     public double calculateArea(String shape, double... dimensions) {
-        switch (shape) {
-            case "circle":
-                return Math.PI * dimensions[0] * dimensions[0];
-            case "rectangle":
-                return dimensions[0] * dimensions[1];
-            case "triangle":
-                return dimensions[0] * dimensions[1] / 2;
-            default:
-                throw new IllegalArgumentException("Unknown shape");
+        AreaCalculator calculator = switch (shape) {
+            case "circle" -> new CircleAreaCalculator(dimensions[0]);
+            case "rectangle" -> new RectangleCalculator(dimensions[0], dimensions[1]);
+            case "triangle" -> new TriangleCalculator(dimensions[0], dimensions[1]);
+            default -> null;
+        };
+        if (calculator == null) {
+            throw new IllegalArgumentException("Unknown shape");
         }
+        return calculator.calculateArea();
     }
 }
